@@ -299,14 +299,11 @@ public class HiveAvroSerializer {
         String string = (String)fieldOI.getPrimitiveJavaObject(structFieldData);
         return new Utf8(string);
       case DATE:
-        return DateWritable.dateToDays(((DateObjectInspector)fieldOI).getPrimitiveJavaObject(structFieldData));
       case TIMESTAMP:
-        Timestamp timestamp =
-            ((TimestampObjectInspector) fieldOI).getPrimitiveJavaObject(structFieldData);
-        return timestamp.getTime();
+        throw new HoodieException("Unexpected Avro schema for Date TypeInfo: " + schema.getType());
       case INT:
         if (schema.getLogicalType() != null && schema.getLogicalType().getName().equals("date")) {
-          return DateWritable.dateToDays(new WritableDateObjectInspector().getPrimitiveJavaObject(structFieldData));
+          throw new HoodieException("Unexpected Avro schema for INT TypeInfo: " + schema.getType());
         }
         return fieldOI.getPrimitiveJavaObject(structFieldData);
       case UNKNOWN:
