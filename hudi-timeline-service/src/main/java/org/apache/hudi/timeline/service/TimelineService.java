@@ -345,7 +345,7 @@ public class TimelineService {
     QueuedThreadPool pool = new QueuedThreadPool(maxThreads, 8, 60_000);
     pool.setDaemon(true);
     final Server server = new Server(pool);
-    ScheduledExecutorScheduler scheduler = new ScheduledExecutorScheduler("TimelineService-JettyScheduler", true, 8);
+    ScheduledExecutorScheduler scheduler = new ScheduledExecutorScheduler("TimelineService-JettyScheduler", true );
     server.addBean(scheduler);
 
     app = Javalin.create(c -> {

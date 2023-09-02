@@ -31,6 +31,8 @@ import org.apache.hadoop.hive.common.type.HiveDecimal;
 import org.apache.hadoop.hive.common.type.HiveVarchar;
 import org.apache.hadoop.hive.serde2.avro.AvroSerdeUtils;
 import org.apache.hadoop.hive.serde2.avro.InstanceCache;
+import org.apache.hadoop.hive.serde2.io.DateWritable;
+import org.apache.hadoop.hive.serde2.io.TimestampWritable;
 import org.apache.hadoop.hive.serde2.objectinspector.ListObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.MapObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
@@ -38,6 +40,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.PrimitiveObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.StructField;
 import org.apache.hadoop.hive.serde2.objectinspector.StructObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.UnionObjectInspector;
+import org.apache.hadoop.hive.serde2.objectinspector.primitive.WritableDateObjectInspector;
 import org.apache.hadoop.hive.serde2.typeinfo.ListTypeInfo;
 import org.apache.hadoop.hive.serde2.typeinfo.MapTypeInfo;
 import org.apache.hadoop.hive.serde2.typeinfo.StructTypeInfo;
@@ -294,11 +297,14 @@ public class HiveAvroSerializer {
         String string = (String)fieldOI.getPrimitiveJavaObject(structFieldData);
         return new Utf8(string);
       case DATE:
+        return new DateWritable((DateWritable)structFieldData);
       case TIMESTAMP:
-        throw new HoodieException("Unexpected Avro schema for Date TypeInfo: " + schema.getType());
+//        throw new HoodieException("Unexpected Avro schema for Date TypeInfo: " + schema.getType());
+        return new TimestampWritable((TimestampWritable)structFieldData).getTimestamp().getTime();
       case INT:
         if (schema.getLogicalType() != null && schema.getLogicalType().getName().equals("date")) {
-          throw new HoodieException("Unexpected Avro schema for INT TypeInfo: " + schema.getType());
+//          throw new HoodieException("Unexpected Avro schema for INT TypeInfo: " + schema.getType());
+         return new WritableDateObjectInspector().getPrimitiveWritableObject(structFieldData).getDays();
         }
         return fieldOI.getPrimitiveJavaObject(structFieldData);
       case UNKNOWN:

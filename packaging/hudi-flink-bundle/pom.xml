@@ -39,6 +39,9 @@
     <parquet.version>${flink.format.parquet.version}</parquet.version>
     <hive.version>2.3.1</hive.version>
     <thrift.version>0.9.3</thrift.version>
+
+
+
   </properties>
 
   <build>
@@ -154,6 +157,12 @@
                 </includes>
               </artifactSet>
               <relocations combine.children="append">
+
+                <relocation>
+                  <pattern>org.apache.parquet</pattern>
+                  <shadedPattern>${flink.bundle.shade.prefix}org.apache.parquet</shadedPattern>
+                </relocation>
+
                 <!-- Kryo -->
                 <relocation>
                   <pattern>com.esotericsoftware.kryo.</pattern>
