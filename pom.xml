@@ -115,9 +115,9 @@
     <log4j2.version>2.17.2</log4j2.version>
     <slf4j.version>1.7.36</slf4j.version>
     <joda.version>2.9.9</joda.version>
-    <hadoop.version>2.10.1</hadoop.version>
+    <hadoop.version>3.1.1</hadoop.version>
     <hive.groupid>org.apache.hive</hive.groupid>
-    <hive.version>2.3.1</hive.version>
+    <hive.version>3.1.0</hive.version>
     <hive.parquet.version>1.10.1</hive.parquet.version>
     <hive.avro.version>1.8.2</hive.avro.version>
     <presto.version>0.273</presto.version>
@@ -129,15 +129,15 @@
     <airlift.version>0.16</airlift.version>
     <prometheus.version>0.8.0</prometheus.version>
     <http.version>4.4.1</http.version>
-    <spark.version>${spark2.version}</spark.version>
+    <spark.version>${spark3.version}</spark.version>
     <spark2.version>2.4.4</spark2.version>
-    <spark3.version>3.3.1</spark3.version>
+    <spark3.version>3.2.0</spark3.version>
     <sparkbundle.version></sparkbundle.version>
     <flink1.16.version>1.16.0</flink1.16.version>
     <flink1.15.version>1.15.1</flink1.15.version>
     <flink1.14.version>1.14.5</flink1.14.version>
     <flink1.13.version>1.13.6</flink1.13.version>
-    <flink.version>${flink1.16.version}</flink.version>
+    <flink.version>${flink1.15.version}</flink.version>
     <hudi.flink.module>hudi-flink1.16.x</hudi.flink.module>
     <flink.bundle.version>1.16</flink.bundle.version>
     <!-- This is fixed to match with version from flink-avro -->
@@ -209,7 +209,7 @@
     <proto.version>3.21.5</proto.version>
     <protoc.version>3.21.5</protoc.version>
     <dynamodb.lockclient.version>1.1.0</dynamodb.lockclient.version>
-    <zookeeper.version>3.5.7</zookeeper.version>
+    <zookeeper.version>3.4.6</zookeeper.version>
     <openjdk.jol.version>0.16</openjdk.jol.version>
     <google.cloud.pubsub.version>1.120.0</google.cloud.pubsub.version>
     <gcs.connector.version>hadoop2-2.2.7</gcs.connector.version>
@@ -1675,6 +1675,18 @@
     </dependencies>
   </dependencyManagement>
   <repositories>
+    <repository>
+      <id>nexus-aliyun</id>
+      <name>nexus-aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
     <repository>
       <id>Maven Central</id>
       <name>Maven Repository</name>

@@ -32,6 +32,7 @@ import org.apache.hadoop.hive.common.type.HiveVarchar;
 import org.apache.hadoop.hive.serde2.avro.AvroSerdeUtils;
 import org.apache.hadoop.hive.serde2.avro.InstanceCache;
 import org.apache.hadoop.hive.serde2.io.DateWritable;
+import org.apache.hadoop.hive.serde2.io.TimestampWritable;
 import org.apache.hadoop.hive.serde2.objectinspector.ListObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.MapObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
@@ -299,14 +300,17 @@ public class HiveAvroSerializer {
         String string = (String)fieldOI.getPrimitiveJavaObject(structFieldData);
         return new Utf8(string);
       case DATE:
-        return DateWritable.dateToDays(((DateObjectInspector)fieldOI).getPrimitiveJavaObject(structFieldData));
+//        return DateWritable.dateToDays(((DateObjectInspector)fieldOI).getPrimitiveJavaObject(structFieldData));
+        return new DateWritable((DateWritable)structFieldData).getDays();
       case TIMESTAMP:
-        Timestamp timestamp =
-            ((TimestampObjectInspector) fieldOI).getPrimitiveJavaObject(structFieldData);
-        return timestamp.getTime();
+//        Timestamp timestamp =
+//            ((TimestampObjectInspector) fieldOI).getPrimitiveJavaObject(structFieldData);
+//        return timestamp.getTime();
+        return new TimestampWritable((TimestampWritable)structFieldData).getTimestamp().getTime();
       case INT:
         if (schema.getLogicalType() != null && schema.getLogicalType().getName().equals("date")) {
-          return DateWritable.dateToDays(new WritableDateObjectInspector().getPrimitiveJavaObject(structFieldData));
+//          return DateWritable.dateToDays(new WritableDateObjectInspector().getPrimitiveJavaObject(structFieldData));
+          return new WritableDateObjectInspector().getPrimitiveWritableObject(structFieldData).getDays();
         }
         return fieldOI.getPrimitiveJavaObject(structFieldData);
       case UNKNOWN:
