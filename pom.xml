@@ -29,7 +29,7 @@
   <groupId>org.apache.hudi</groupId>
   <artifactId>hudi</artifactId>
   <packaging>pom</packaging>
-  <version>0.13.0.mspbots</version>
+  <version>0.13.0</version>
   <description>Apache Hudi brings stream style processing on big data</description>
   <url>https://github.com/apache/hudi</url>
   <name>Hudi</name>
@@ -206,8 +206,11 @@
     <disruptor.version>3.4.2</disruptor.version>
     <antlr.version>4.7</antlr.version>
     <aws.sdk.version>1.12.22</aws.sdk.version>
-    <proto.version>3.21.5</proto.version>
-    <protoc.version>3.21.5</protoc.version>
+<!--    <proto.version>3.21.5</proto.version>-->
+<!--    <protoc.version>3.21.5</protoc.version>-->
+    <proto.version>3.11.4</proto.version>
+    <protoc.version>3.11.4</protoc.version>
+
     <dynamodb.lockclient.version>1.1.0</dynamodb.lockclient.version>
     <zookeeper.version>3.4.6</zookeeper.version>
     <openjdk.jol.version>0.16</openjdk.jol.version>
